@@ -23,16 +23,6 @@ class SinaNewsSpider(scrapy.spiders.Spider):
 	allowed_domains = ["sina.cn"]
 	start_urls = (
 		"http://news.sina.cn/?vt=1&sa=t124d1712309v84",
-		# ,"http://news.sina.cn/index1.d.html?vt=1"
-		# ,"http://news.sina.cn/?sa=t124d8889597v84&vt=1"
-		# ,"http://mil.sina.cn/?vt=1"
-		# ,"http://news.sina.cn/roll.d.html?vt=1"
-		# ,"http://sina.cn/?vt=1"
-		# ,"http://news.sina.cn/gn/2015-12-13/detail-ifxmpxnx5062324.d.html"
-		# ,"http://news.sina.cn/?vt=4"
-		# ,"http://news.sina.cn/sh/2015-12-13/detail-ifxmpnqi6398999.d.html"
-		# ,"http://news.sina.cn/guide.d.html?r=4218"
-		# ,"http://house.sina.cn/touch/index/?source_ext=sina&source=m_sina_hqdh4"
 	)
 
 	lock = threading.RLock()
@@ -44,16 +34,6 @@ class SinaNewsSpider(scrapy.spiders.Spider):
 	cursor.execute('SET NAMES utf8;')
 	cursor.execute('SET CHARACTER SET utf8;')
 	cursor.execute('SET character_set_connection=utf8;')
-
-	# for restore: restore from file queue
-	# fin_queue = open("queue","w+")
-	# if os.path.getsize("queue") != 0:
-	# 	g_queue_urls = pickle.load(fin_queue)
-	# fin_queue.close()
-	# fin_container = open("container","w+")
-	# if os.path.getsize("container") != 0:
-	# 	g_container_urls = pickle.load(fin_container)
-	# fin_container.close()
 
 	def parse(self, response):
 
@@ -67,15 +47,6 @@ class SinaNewsSpider(scrapy.spiders.Spider):
 		for i in content_arr:
 			if len(i) > 50:
 				content = content + i
-		# print content
-
-		# put data out to file	
-		# fo = open("data.txt","a")
-		# fo.write("\r\n")
-		# fo.write(response.url)
-		# fo.write(title.encode('utf-8'))
-		# fo.write(content.encode('utf-8'))
-		# fo.close()
 
 		# put data into an dictionary
 		# item = {}
@@ -100,19 +71,6 @@ class SinaNewsSpider(scrapy.spiders.Spider):
 			if i.url not in self.g_container_urls:
 				self.g_queue_urls.put(i.url)
 				self.g_container_urls.add(i.url)
-		
-		# for restore: save the queue per 10s 
-		# self.lock_queue.acquire()
-		# self.lock_container.acquire()
-		# if time.localtime().tm_sec%10 == 0:
-		# 	fin_queue = open("queue", "w+");
-		# 	pickle.dump(self.g_queue_urls, fin_queue)
-		# 	fin_container = open("container", "w+")
-		# 	pickle.dump(self.g_container_urls, fin_container)
-		# 	fin_container.close()
-		# 	fin_queue.close()
-		# self.lock_queue.release()
-		# self.lock_container.release()
 
 		# make all the request in the queue
 		for j in range(self.g_queue_urls.qsize()):
