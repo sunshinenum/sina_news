@@ -2,6 +2,14 @@
 
 # Scrapy settings for sina_news project
 
+# connection for mongodb
+ITEM_PIPELINES = ['sina_news.pipelines.SinaNewsPipeline']
+
+MONGODB_SERVER = "localhost"
+MONGODB_PORT = 27017
+MONGODB_DB = "web_pages"
+MONGODB_COLLECTION = "pages"
+
 # log level default 'DEBUG' ,levels are  CRITICAL、 ERROR、WARNING、INFO、DEBUG
 LOG_LEVEL = 'INFO'
 
@@ -71,7 +79,6 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 64
 # ITEM_PIPELINES = {
 #    'sina_news.pipelines.SinaNewsPipeline': 300,
 # }
-ITEM_PIPELINES = ['sina_news.pipelines.SinaNewsPipeline']
 
 
 # Enable and configure the AutoThrottle extension (disabled by default)
