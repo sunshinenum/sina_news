@@ -9,6 +9,8 @@
 	python 2.7
 	scrapy
 	mysql
+	mongo
+
 
 # build preparations on ubuntu
 	http://scrapy-chs.readthedocs.org/zh_CN/latest/topics/ubuntu.html#topics-ubuntu
