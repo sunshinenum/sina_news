@@ -19,7 +19,6 @@
 	
 # database: mysql
 	port:3306 user:root password:1993
-	
-	create database web_pages default chat set utf8;
+	create database web_pages default char set utf8;
 	use web_pages;
 	create table pages(page_id long, url varchar(256), title varchar(256), content varchar(10240));
