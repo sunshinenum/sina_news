@@ -11,11 +11,12 @@ connection = pymongo.MongoClient(
 	'127.0.0.1',
 	27017
 )
+
 db = connection['web_pages']
 collection = db['pages']
 
 # define words
-words = ['大爷','男子','大妈','女子','专家','凤姐','女孩']
+words = ['大爷','男子','大妈','女子','专家','凤姐','女孩','奥巴马','习近平','中国','医生','美国','日本']
 
 # count words
 print '[+] total news : %s ' % collection.find().count()
